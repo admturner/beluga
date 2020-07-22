@@ -1,0 +1,13 @@
+## Folders and files for git to ignore
+
+# OS generated files.
+*~
+.Trash-*
+.DS_Store
+._*
+
+# Ignore the environment file with the DB credentials.
+.env
+
+# Don't share individual sites files.
+/wp-content/
