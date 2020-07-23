@@ -10,4 +10,4 @@
 .env
 
 # Don't share individual sites files.
-/wp-content/
+/wordpress/

@@ -1,8 +1,8 @@
 # Beluga 🐳
 
-Beluga is a local development environment for WordPress plugins and themes. It uses [Docker](https://www.docker.com/) and Docker Compose.
+Beluga is a local development environment for WordPress. It uses [Docker](https://www.docker.com/) and Docker Compose.
 
-Beluga is still in development, but the stable branch should work to provide a basic WordPress plugin and theme development environment.
+Beluga is still in development, but the stable branch should work to provide a basic WordPress development environment.
 
 ## How to Use
 
