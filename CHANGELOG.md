@@ -16,6 +16,12 @@ Changelog formatting (http://semver.org/)
 ### Project Management
 -->
 
+## 1.1.0-beta.1 (:construction: 2020-07-24)
+
+### Enhancements
+
+- Use environment variable fallback values for when `.env` isn't found.
+
 ## 1.0.0 (2020-07-24)
 
 ### Features
