@@ -10,7 +10,7 @@
 .env
 
 # Ignore the built config files.
-config/wordpress/Dockerfile
+config/containers/Dockerfile
 
 # Don't share individual sites files.
 /wordpress/*
