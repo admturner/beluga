@@ -9,6 +9,10 @@ if [ ! -f './config/wordpress/Dockerfile' ]; then
 	sed -i '' -e "s/\$GID/${GROUP_ID}/g" './config/wordpress/Dockerfile'
 fi
 
+if [ ! -f './.env' ]; then
+	cp './config/.env-example' './.env'
+fi
+
 docker-compose up --detach
 
 docker exec -ti wordpress /bin/bash -c 'chown -R www-data: /var/www/html'
