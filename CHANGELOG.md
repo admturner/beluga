@@ -16,7 +16,11 @@ Changelog formatting (http://semver.org/)
 ### Project Management
 -->
 
-## 1.1.0-beta.1 (:construction: 2020-07-24)
+## 1.1.1-beta.1 (:construction: 2020-07-29)
+
+### Bug Fixes
+
+:bug: Fix #1 modify file permissions to give system user access.
 
 ### Enhancements
 
