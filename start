@@ -2,34 +2,34 @@
 #
 # Checks for required configs then starts Docker containers.
 
+readonly USER_ID="$(id -u)"
+readonly GROUP_ID="$(id -g)"
+
 # Set up the .env file if this is the first run.
-if [ ! -f './.env' ]; then
-	echo ""
+if [[ ! -f './.env' ]]; then
+	echo 'First run: Setting up environment file...'
 fi
 
-USER_ID=`id -u`
-GROUP_ID=`id -g`
-
-if [ ! -f './config/containers/Dockerfile' ]; then
+if [[ ! -f './config/containers/Dockerfile' ]]; then
 	cp './config/containers/Dockerfile.template' './config/containers/Dockerfile'
 	sed -i '' -e "s/\$UID/${USER_ID}/g" './config/containers/Dockerfile'
 	sed -i '' -e "s/\$GID/${GROUP_ID}/g" './config/containers/Dockerfile'
 fi
 
-CONTAINERS=wordpress
+containers=wordpress
 
-echo "Starting Docker containers"
-docker-compose up --detach $CONTAINERS
+echo 'Starting Docker containers'
+docker-compose up --detach "${containers}"
 
 docker exec -ti wordpress /bin/bash -c 'chown -R www-data: /var/www/html'
 
-while [ "$READY" != "true" ]; do
+while [[ -z "${ready}" ]]; do
 	if curl -I http://localhost:8000 2>/dev/null | grep -q -e "HTTP/1.1 200 OK" -e "HTTP:/1.1 302 Found"; then
-		READY=true
+		ready=true
 	else
 		sleep 4
-		echo "Waiting for WP to boot..."
+		echo 'Waiting for WP to boot...'
 	fi
 done
 
-echo "All set!"
+echo 'All set!'
