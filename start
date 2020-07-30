@@ -2,34 +2,69 @@
 #
 # Checks for required configs then starts Docker containers.
 
-readonly USER_ID="$(id -u)"
-readonly GROUP_ID="$(id -g)"
+set_up_env_file() {
+  echo 'First run: Setting up environment file...'
+  # shellcheck disable=SC1091
+  source ./bin/make
+}
 
-# Set up the .env file if this is the first run.
-if [[ ! -f './.env' ]]; then
-	echo 'First run: Setting up environment file...'
-fi
+set_up_dockerfile() {
+	local user_id
+  local group_id
 
-if [[ ! -f './config/containers/Dockerfile' ]]; then
-	cp './config/containers/Dockerfile.template' './config/containers/Dockerfile'
-	sed -i '' -e "s/\$UID/${USER_ID}/g" './config/containers/Dockerfile'
-	sed -i '' -e "s/\$GID/${GROUP_ID}/g" './config/containers/Dockerfile'
-fi
+  if ! cp './config/containers/Dockerfile.template' './config/containers/Dockerfile'; then
+    echo -e "Unable to copy Dockerfile in config." >&2
+    exit 1
+  else
+    echo -e "Copied WordPress container Dockerfile."
+  fi
 
-containers=wordpress
+  user_id="$(id -u)"
+	group_id="$(id -g)"
 
-echo 'Starting Docker containers'
-docker-compose up --detach "${containers}"
+  echo -e "\nRUN usermod -u ${user_id} www-data" >> './config/containers/Dockerfile'
+  echo -e "RUN groupmod -o -g ${group_id} www-data" >> './config/containers/Dockerfile'
+}
 
-docker exec -ti wordpress /bin/bash -c 'chown -R www-data: /var/www/html'
+start_docker() {
+  local containers
 
-while [[ -z "${ready}" ]]; do
-	if curl -I http://localhost:8000 2>/dev/null | grep -q -e "HTTP/1.1 200 OK" -e "HTTP:/1.1 302 Found"; then
-		ready=true
-	else
-		sleep 4
-		echo 'Waiting for WP to boot...'
-	fi
-done
+  # TODO support muliple containers.
+  containers='wordpress'
 
-echo 'All set!'
+  echo -e 'Starting Docker containers...'
+
+  docker-compose up --detach "${containers}"
+  if (( $? != 0 )); then
+    echo -e 'Failed to start Docker containers. See terminal output for errors.'
+    exit 1
+  fi
+
+  docker exec -ti wordpress /bin/bash -c 'chown -R www-data: /var/www/html'
+
+  while [[ -z "${ready}" ]]; do
+    if curl -I http://localhost:8000 2>/dev/null | grep -q -e "HTTP/1.1 200 OK" -e "HTTP:/1.1 302 Found"; then
+      ready=true
+    else
+      sleep 4
+      echo 'Waiting for network to boot...'
+    fi
+  done
+
+  echo -e 'All set!'
+}
+
+main() {
+  # Set up the .env file if this is the first run.
+  if [[ ! -f './.env' ]]; then
+    set_up_env_file
+  fi
+
+  if [[ ! -f './config/containers/Dockerfile' ]]; then
+    set_up_dockerfile
+  fi
+
+  start_docker
+}
+
+main "$@"
