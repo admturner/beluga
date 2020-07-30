@@ -2,12 +2,26 @@
 #
 # Checks for required configs then starts Docker containers.
 
+#######################################
+# Runs the ./bin/make shell script.
+# Arguments:
+#   None
+# Outputs:
+#   Creates the ./.env file
+#######################################
 set_up_env_file() {
   echo 'First run: Setting up environment file...'
   # shellcheck disable=SC1091
   source ./bin/make
 }
 
+#######################################
+# Creates the WP container Dockerfile.
+# Arguments
+#   None
+# Outputs:
+#   Creates the Dockerfile and writes RUN commands to it
+#######################################
 set_up_dockerfile() {
 	local user_id
   local group_id
@@ -26,6 +40,11 @@ set_up_dockerfile() {
   echo -e "RUN groupmod -o -g ${group_id} www-data" >> './config/containers/Dockerfile'
 }
 
+#######################################
+# Calls Docker Compose to start containers.
+# Arguments:
+#   None
+#######################################
 start_docker() {
   local containers
 
@@ -54,8 +73,12 @@ start_docker() {
   echo -e 'All set!'
 }
 
+#######################################
+# Starts the script.
+# Arguments:
+#   None
+#######################################
 main() {
-  # Set up the .env file if this is the first run.
   if [[ ! -f './.env' ]]; then
     set_up_env_file
   fi
