@@ -1,4 +1,1 @@
 FROM wordpress:latest
-
-RUN usermod -u $UID www-data
-RUN groupmod -o -g $GID www-data
