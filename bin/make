@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo -e '\nThe system can guide you through defining required environment
+variables now, or you can skip this step and enter them manually later.\n'
+
+while true; do
+  read -r -p "Skip interactive setup? [N/y]" input
+
+  case "${input}" in
+    [yY][eE][sS][yY])
+      # run standard copy function
+      echo 'Yes'
+      break
+      ;;
+    [nN][oO][nN])
+      # run the interactive copy function
+      echo 'No'
+      break
+      ;;
+    *)
+      echo 'Invalid input'
+      ;;
+  esac
+done
+
+exit 1
+
+
+if ! cp './config/.env-example' './.env'; then
+  echo "Unable to copy environment file to root" >&2
+  exit 1
+fi
