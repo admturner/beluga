@@ -9,5 +9,15 @@
 # Ignore the environment file with the DB credentials.
 .env
 
+# Ignore the built config files.
+config/containers/Dockerfile
+
 # Don't share individual sites files.
-/wordpress/
+/wordpress/*
+/plugins/*
+/themes/*
+
+# But do keep some things.
+!wordpress/.gitkeep
+!plugins/.gitkeep
+!themes/.gitkeep

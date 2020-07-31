@@ -16,6 +16,16 @@ Changelog formatting (http://semver.org/)
 ### Project Management
 -->
 
+## 1.1.1 (2020-07-29)
+
+### Bug Fixes
+
+:bug: Fix #1 modify file permissions to give system user access.
+
+### Enhancements
+
+- Use environment variable fallback values for when `.env` isn't found.
+
 ## 1.0.0 (2020-07-24)
 
 ### Features
