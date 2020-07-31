@@ -16,7 +16,7 @@ Changelog formatting (http://semver.org/)
 ### Project Management
 -->
 
-## 1.1.1-beta.1 (:construction: 2020-07-29)
+## 1.1.1 (2020-07-29)
 
 ### Bug Fixes
 
