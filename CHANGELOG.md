@@ -16,7 +16,18 @@ Changelog formatting (http://semver.org/)
 ### Project Management
 -->
 
-## 1.1.1-beta.1 (:construction: 2020-07-29)
+## 1.2.0 (2020-08-03)
+
+### Features
+
+- ✨ Add mailhog service for managing WP system emails. (96f6096d)
+- ✨ Add phpmyadmin service for direct database access (ed047d7)
+
+### Code Quality
+
+- Fix yml file spacing.
+
+## 1.1.1 (2020-07-29)
 
 ### Bug Fixes
 
