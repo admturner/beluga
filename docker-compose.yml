@@ -10,7 +10,7 @@ services:
     env_file: .env
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-wordpress}
-      MYSQL_USER: ${MYSQL_USER:-root}
+      MYSQL_USER: ${MYSQL_USER:-wp}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD:-password}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
 
@@ -25,7 +25,7 @@ services:
     env_file: .env
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: ${MYSQL_USER:-root}
+      WORDPRESS_DB_USER: ${MYSQL_USER:-wp}
       WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD:-password}
       WORDPRESS_DB_NAME: ${MYSQL_DATABASE:-wordpress}
       WORDPRESS_DEBUG: "true"
