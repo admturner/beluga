@@ -1,0 +1,16 @@
+#!/bin/bash
+
+main() {
+	local process="$@"
+
+  case "${process}" in
+    build) echo 'Building...' ;;
+    clean) echo 'Cleaning up...' ;;
+    destroy) source ./bin/destroy.sh ;;
+    start|up) source ./bin/start.sh ;;
+    stop) echo 'Stopping...' # source ./bin/stop.sh ;;
+    help|*) echo 'Not correct' ;; # TODO display help
+  esac
+}
+
+main "$@"
