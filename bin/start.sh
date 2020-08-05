@@ -31,6 +31,8 @@ set_up_dockerfile() {
 #   None
 #######################################
 main() {
+  local ready
+
   if [[ ! -f './config/containers/Dockerfile' ]]; then
     set_up_dockerfile
   fi
@@ -44,7 +46,7 @@ main() {
   docker exec -ti wordpress /bin/bash -c 'chown -R www-data: /var/www/html'
 
   while [[ -z "${ready}" ]]; do
-    if curl -I http://localhost:8000 2>/dev/null | grep -q -e "HTTP/1.1 200 OK" -e "HTTP:/1.1 302 Found"; then
+    if curl -I http://localhost:8000 2>/dev/null | grep -q -e "HTTP/1.1 200 OK" -e "HTTP/1.1 302 Found"; then
       ready=true
     else
       sleep 4
