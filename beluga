@@ -39,7 +39,7 @@ version() {
 #   The script command, a string
 #######################################
 main() {
-	local process="$@"
+	local process="$*"
 
   case "${process}" in
     destroy) source ./bin/destroy.sh ;;
