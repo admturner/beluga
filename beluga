@@ -1,15 +1,34 @@
 #!/bin/bash
 
+show_help() {
+  echo -e 'Manage the Docker Compose development environment.\n'
+  echo 'Usage:
+  ./beluga [command]
+  '
+  echo 'Commands:
+  destroy         Stops and deletes all volumes, images, and containers.
+  down            Stop and remove containers, networks, images, and volumes.
+  start           Start services. Create environment and containers if needed.
+  stop            Stop services.
+  version         Display the Beluga, Docker Compose, and Docker versions.'
+}
+
+version() {
+  echo "Beluga version $(cat ./version)"
+  docker-compose -v
+  docker -v
+}
+
 main() {
 	local process="$@"
 
   case "${process}" in
-    build) echo 'Building...' ;;
-    clean) echo 'Cleaning up...' ;;
     destroy) source ./bin/destroy.sh ;;
-    start|up) source ./bin/start.sh ;;
-    stop) echo 'Stopping...' # source ./bin/stop.sh ;;
-    help|*) echo 'Not correct' ;; # TODO display help
+    down) docker-compose down --volumes --remove-orphans ;;
+    start) source ./bin/start.sh ;;
+    stop) docker-compose stop ;;
+    -v|version) version ;;
+    help|*) show_help ;;
   esac
 }
 
