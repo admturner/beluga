@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#######################################
+# Displays the Beluga help reference.
+# Arguments
+#   None
+# Outputs:
+#   The Beluga help reference
+#######################################
 show_help() {
   echo -e 'Manage the Docker Compose development environment.\n'
   echo 'Usage:
@@ -13,12 +20,24 @@ show_help() {
   version         Display the Beluga, Docker Compose, and Docker versions.'
 }
 
+#######################################
+# Displays the currently installed versions.
+# Arguments
+#   None
+# Outputs:
+#   The Beluga, Docker Compose, and Docker version numbers
+#######################################
 version() {
   echo "Beluga version $(cat ./version)"
   docker-compose -v
   docker -v
 }
 
+#######################################
+# Handle beluga script commands.
+# Arguments
+#   The script command, a string
+#######################################
 main() {
 	local process="$@"
 
