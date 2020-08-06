@@ -12,10 +12,10 @@ set_up_dockerfile() {
   local group_id
 
   if ! cp './config/containers/Dockerfile.template' './config/containers/Dockerfile'; then
-    echo -e "Unable to copy Dockerfile in config." >&2
+    echo -e "${YELLOW}× Unable to copy Dockerfile in config.${RESET}" >&2
     exit 1
   else
-    echo -e "Copied WordPress container Dockerfile."
+    echo -e "✔ Copied WordPress container Dockerfile."
   fi
 
   user_id="$(id -u)"
@@ -32,6 +32,8 @@ set_up_dockerfile() {
 #######################################
 main() {
   local ready
+
+  echo -e "▷ Running the Beluga startup sequence..."
 
   if [[ ! -f './config/containers/Dockerfile' ]]; then
     set_up_dockerfile
@@ -54,7 +56,7 @@ main() {
     fi
   done
 
-  echo -e 'All set!'
+  echo -e "${GREEN}✔ All set${RESET}"
 }
 
 main "$@"
