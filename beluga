@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./bin/shared.sh
+
 #######################################
 # Displays the Beluga help reference.
 # Arguments
@@ -16,21 +18,9 @@ show_help() {
   destroy         Stops and deletes all volumes, images, and containers.
   down            Stop and remove containers, networks, images, and volumes.
   start           Start services. Create environment and containers if needed.
+  status          Show the current containers and their status.
   stop            Stop services.
   version         Display the Beluga, Docker Compose, and Docker versions.'
-}
-
-#######################################
-# Displays the currently installed versions.
-# Arguments
-#   None
-# Outputs:
-#   The Beluga, Docker Compose, and Docker version numbers
-#######################################
-version() {
-  echo "Beluga version $(cat ./version)"
-  docker-compose -v
-  docker -v
 }
 
 #######################################
@@ -45,6 +35,7 @@ main() {
     destroy) source ./bin/destroy.sh ;;
     down) docker-compose down --volumes --remove-orphans ;;
     start) source ./bin/start.sh ;;
+    status) status ;;
     stop) docker-compose stop ;;
     -v|version) version ;;
     help|*) show_help ;;
