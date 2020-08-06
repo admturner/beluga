@@ -29,9 +29,9 @@ show_help() {
 #   The script command, a string
 #######################################
 main() {
-	local process="$*"
+	local command="$*"
 
-  case "${process}" in
+  case "${command}" in
     destroy) source ./bin/destroy.sh ;;
     down) docker-compose down --volumes --remove-orphans ;;
     start) source ./bin/start.sh ;;
