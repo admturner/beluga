@@ -6,7 +6,7 @@ services:
     image: mariadb:10.5
     volumes:
       - "db_data:/var/lib/mysql"
-    restart: always
+    restart: unless-stopped
     env_file: .env
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-wordpress}
@@ -21,7 +21,7 @@ services:
     build: "./config/containers"
     ports:
       - "8000:80"
-    restart: always
+    restart: unless-stopped
     env_file: .env
     environment:
       WORDPRESS_DB_HOST: db:3306
@@ -42,6 +42,7 @@ services:
     image: phpmyadmin/phpmyadmin
     ports:
       - "3333:80"
+    restart: unless-stopped
     env_file: .env
     environment:
       PMA_HOST: db
@@ -54,6 +55,7 @@ services:
     ports:
       - "8025:8025"
       - "1025:1025"
+    restart: unless-stopped
 
 volumes:
   db_data: {}
