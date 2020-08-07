@@ -1,0 +1,45 @@
+#!/bin/bash
+
+source ./bin/shared.sh
+
+#######################################
+# Displays the Beluga help reference.
+# Arguments
+#   None
+# Outputs:
+#   The Beluga help reference
+#######################################
+show_help() {
+  echo -e 'Manage the Docker Compose development environment.\n'
+  echo 'Usage:
+  ./beluga [command]
+  '
+  echo 'Commands:
+  destroy         Stops and deletes all volumes, images, and containers.
+  down            Stop and remove containers, networks, images, and volumes.
+  start           Start services. Create environment and containers if needed.
+  status          Show the current containers and their status.
+  stop            Stop services.
+  version         Display the Beluga, Docker Compose, and Docker versions.'
+}
+
+#######################################
+# Handle beluga script commands.
+# Arguments
+#   The script command, a string
+#######################################
+main() {
+	local command="$*"
+
+  case "${command}" in
+    destroy) source ./bin/destroy.sh ;;
+    down) docker-compose down --volumes --remove-orphans ;;
+    start) source ./bin/start.sh ;;
+    status) status ;;
+    stop) docker-compose stop ;;
+    -v|version) version ;;
+    help|*) show_help ;;
+  esac
+}
+
+main "$@"
