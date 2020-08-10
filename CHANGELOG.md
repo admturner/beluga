@@ -16,16 +16,21 @@ Changelog formatting (http://semver.org/)
 ### Project Management
 -->
 
-## 1.2.0 (2020-08-03)
+## 1.2.0 (2020-08-10)
 
 ### Features
 
+- 🐳 Create `beluga` entrypoint script and supporting lifecycle scripts with commands to manage the Docker containers. (545b88c)
 - ✨ Add mailhog service for managing WP system emails. (96f6096d)
 - ✨ Add phpmyadmin service for direct database access (ed047d7)
 
 ### Code Quality
 
 - Fix yml file spacing.
+
+### Documentation
+
+- 📝 Update readme with new script instructions. (87b66dd)
 
 ## 1.1.1 (2020-07-29)
 
