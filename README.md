@@ -6,7 +6,7 @@
                                     /        
                                 (_ /         
 
-# Beluga 🐳 [ ![Download](https://img.shields.io/github/v/release/admturner/Beluga.svg) ](https://github.com/admturner/beluga/releases/tag/v1.1.1)
+# Beluga 🐳 [ ![Download](https://img.shields.io/github/v/release/admturner/Beluga.svg) ](https://github.com/admturner/beluga/releases/tag/v1.2.0)
 
 Beluga is a local development environment for WordPress. It uses [Docker](https://www.docker.com/) and Docker Compose.
 
