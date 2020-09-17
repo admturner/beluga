@@ -1,8 +1,12 @@
 #!/bin/bash
 
+export RED="\033[38;5;1m"
+export ORANGE="\033[38;5;9m"
 export YELLOW="\033[38;5;3m"
 export GREEN="\033[38;5;2m"
-export RED="\033[38;5;9m"
+export BLUE="\033[38;5;6m"
+export VIOLET="\033[38;5;4m"
+export PINK="\033[38;5;5m"
 export RESET="\033[0m"
 export BOLD="\033[1m"
 
@@ -14,9 +18,10 @@ export BOLD="\033[1m"
 #   The Beluga, Docker Compose, and Docker version numbers
 #######################################
 version() {
-  echo "Beluga version $(cat ./version)"
+  echo -e "${VIOLET}Beluga version $(cat ./version)${BLUE}"
   docker-compose -v
   docker -v
+  echo -e "${RESET}"
 }
 export -f version
 
