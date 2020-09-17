@@ -33,7 +33,19 @@ set_up_dockerfile() {
 main() {
   local ready
 
+  echo -e "${RED}      ____                                "
+  echo -e "${ORANGE}     /   )          /                     "
+  echo -e "${YELLOW} ---/__ /-----__---/-----------__----__-  "
+  echo -e "${GREEN}   /    )   /___) /   /   /  /   ) /   )  "
+  echo -e "${BLUE} _/____/___(___ _/___(___(__(___/_(___(_  "
+  echo -e "${VIOLET}                               /          "
+  echo -e "${PINK}                           (_ /           ${RESET}"
+  
+  version
+
   echo -e "▷ Running the Beluga startup sequence..."
+
+  exit 0
 
   if [[ ! -f './config/containers/Dockerfile' ]]; then
     set_up_dockerfile
